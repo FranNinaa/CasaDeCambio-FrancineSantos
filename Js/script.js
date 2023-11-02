@@ -30,4 +30,18 @@ function carregarMoedas(datalistId) {
     });
     // Envia a solicitação para obter a lista de moedas
     xhr.send();
+
+
 }
+// Cria uma instância do objeto Date para obter a data e hora atual
+const dataHoraAtual = new Date();
+
+// Obtenha a data atual no formato "dd/mm/yyyy"
+const dataAtual = dataHoraAtual.toLocaleDateString();
+
+// Obtenha a hora atual no formato "hh:mm:ss"
+const horaAtual = dataHoraAtual.toLocaleTimeString();
+
+// Exiba a data e hora no console ou em algum elemento HTML
+console.log("Data atual: " + dataAtual);
+console.log("Hora atual: " + horaAtual);

@@ -1,30 +1,33 @@
 carregarMoedas();
+
 function carregarMoedas() {
-    // Cria uma nova solicitação XMLHttpRequest
-    let xhr = new XMLHttpRequest();
+    const url = 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json&$select=simbolo,nomeFormatado';
+    const listaMoedas = document.getElementById("IdMoedas");
 
-    xhr.open('GET', 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json&$select=simbolo,nomeFormatado');
-
-    // Adiciona um evento para lidar com a resposta da solicitação
-    xhr.addEventListener('load', function () {
-            let resposta = xhr.responseText
-            let moedas = JSON.parse(resposta)
+    // Usando o método fetch para obter os dados da API
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                // Em caso de erro, lança um erro e interrompe o processo
+                throw new Error('Erro ao carregar moedas. Código de erro: ' + response.status);
+            }
+            // Se a resposta for bem-sucedida, analisa o JSON
+            return response.json();
+        })
+        .then(moedas => {
             console.log(moedas);
 
-            //carrega moedas no select da tela
-            let listaMoedas = document.getElementById("IdMoedas");
-            for (let i = 0; i < moedas.value.length; i++){
-                console.log(moedas.value[i].simbolo)
+            // Preenche o select na tela com as moedas obtidas
+            for (const moeda of moedas.value) {
+                console.log(moeda.simbolo);
 
-                let optionMoeda = document.createElement("option")
-                optionMoeda.value = moedas.value[i].simbolo;
-                optionMoeda.innerText = moedas.value[i].nomeFormatado;
-
+                // Cria um elemento <option> para cada moeda
+                const optionMoeda = new Option(moeda.nomeFormatado, moeda.simbolo);
                 listaMoedas.appendChild(optionMoeda);
-
             }
-        }
-    );
-    // Envia a solicitação para obter a lista de moedas
-    xhr.send();
+        })
+        .catch(error => {
+            // Trata erros exibindo uma mensagem de alerta
+            alert(error.message);
+        });
 }

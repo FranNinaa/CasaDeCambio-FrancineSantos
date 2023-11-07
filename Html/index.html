@@ -1,31 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casa de Câmbio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7Rxnatzjc6.2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../Style/style.css">
     <link rel="icon" href="../Image/intercambio.png" type="image/x-icon">
 </head>
-
 <body>
-    <div class="container">
-        <h1 class="page-title"> Casa de Cambio</h1>
+    <div class="container"><br>
+        <div class="row">
+            <h1 class="text-center">Casa de Câmbio</h1>
+            <div class="d-flex justify-content-center align-items-center">
+                <form class="row g-1">
+                    <label for="moedaOrigemInput" class="form-label">Moeda de Origem</label>
+                    <select id="IdMoedasOrigem" class="form-select" aria-label="Default select example">
+                        <option value="BRL" selected>Real</option>
+                    </select>
+                    <br><br>
+                    <div class="g-1">
+                        <label for="valorConverterInput" class="form-label">Valor a Converter</label>
+                        <input type="number" class="form-control" id="valorConverterInput">
+                    </div>
+                    <label for="moedaDestinoInput" class="form-label">Moeda de Destino</label>
+                    <select id="IdMoedasDestino" class="form-select" aria-label="Default select example">
+                        <option value="BRL" selected>Real</option>
+                    </select>
+                    <br><br>
 
-        <p class="page-subtitle">Escolha uma Moeda Para Conversão:</p>
-
-        <div id='divInput'>
-            <select name="" id="IdMoedas" class="form-select form-select-lg mb-3"></select>
+                    <button type="button" class="btn btn-primary" id="convertButton" onclick="calcularCotacao()">Cotação</button>
+                    <textarea class="form-control" id="saidaTextArea" name="nmSaida" placeholder=""></textarea>
+                </form>
+            </div>
         </div>
-        
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-   / <script src="../Js/script.js"></script>
-</body>
+    <script>
+        carregarMoedas();
 
+        function carregarMoedas() {
+            const url = 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json&$select=simbolo,nomeFormatado';
+            const listaMoedasOrigem = document.getElementById("IdMoedasOrigem");
+            const listaMoedasDestino = document.getElementById("IdMoedasDestino");
+
+            // Usando o método fetch para obter os dados da API
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        // Em caso de erro, lança um erro e interrompe o processo
+                        throw new Error('Erro ao carregar moedas. Código de erro: ' + response.status);
+                    }
+                    // Se a resposta for bem-sucedida, analisa o JSON
+                    return response.json();
+                })
+                .then(moedas => {
+                    // Preenche os select boxes na tela com as moedas obtidas
+                    for (const moeda of moedas.value) {
+                        const optionMoeda = new Option(moeda.nomeFormatado, moeda.simbolo);
+                        listaMoedasOrigem.appendChild(optionMoeda);
+                        listaMoedasDestino.appendChild(optionMoeda.cloneNode(true));
+                    }
+                })
+                .catch(error => {
+                    // Trata erros exibindo uma mensagem de alerta
+                    alert(error.message);
+                });
+        }
+    </script>
+</body>
 </html>

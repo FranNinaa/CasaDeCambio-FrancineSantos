@@ -1,56 +1,44 @@
-body {
-    font-family: 'Roboto Mono',monospace;
+ /* cores dos formulários */
+ :root {
+    --corPrincipal: #dee6f0;
+    --corTexto: #333;
+    --corNeutroForm: #f9fcff;
+}
+
+body { 
+
     min-height: 200px;
     background-image: url('https://www.parmais.com.br/wp-content/uploads/2016/08/Diagnóstico-financeiro-pessoal1.jpg');
     background-color: #000000;
     background-size: 200vh;
     background-position: center bottom;
-    background-repeat: no-repeat;
-  }
-  #divInput {
-    text-align: top center;
-  }
-  #divFinal {
-    text-align: center;
-    color:#FFD700;
-    font-size: 120px;
-    font-weight: bold;
-  
-  
-  }
-  p {
-    text-align: top center;
-    font-size: 22px;
-    font-weight: bold;
+    background-repeat: no-repeat;}
 
-  }
-  .page-input {
-    text-align: center;
-      color:#000000;
-  }
-  .page-a {
-    text-align: center;
-  
-  }
-  .container {
-    text-align: center;
-    padding: 20px;
-    height: 100vh;
-  }
-  
-  .page-title {
-    color:#FFD700;
-    margin: 0 0 8px;
-  }
-  
-  .page-subtitle {
-    color:#F0E68C;
-    margin-top: 35px;
-  }
-  
-  
-  .page-ordem {
-    text-align: center;
-      color:#000000;
-  }
-  
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-image: url('https://www.parmais.com.br/wp-content/uploads/2016/08/Diagnóstico-financeiro-pessoal1.jpg');
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    background-color: #000000;
+    background-size: 200vh;
+    background-position: center bottom;
+   
+}
+
+h1{
+    min-height: 5vh;
+    color: blue;
+}
+label{
+    color: blue;
+    font-size: 20px;
+    
+}
+
+.form-label{
+    margin:auto;
+    padding-top:20px;
+}

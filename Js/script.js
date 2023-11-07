@@ -1,13 +1,11 @@
         // Função para carregar a lista de moedas (tanto origem quanto destino)
         function carregarMoedas(datalistId) {
-            // Obtém o elemento de entrada (moedaOrigemInput ou moedaDestinoInput) e o elemento datalist correspondente
             let inputElement = document.getElementById(datalistId);
             let datalist = document.getElementById(datalistId);
 
             // Cria uma nova solicitação XMLHttpRequest
             let xhr = new XMLHttpRequest();
 
-            // Abre uma solicitação GET para a API do Banco Central (Note que você pode enfrentar problemas com chamadas de API para outro domínio)
             xhr.open('GET', 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json&$select=simbolo,nomeFormatado');
 
             // Adiciona um evento para lidar com a resposta da solicitação
@@ -50,7 +48,7 @@
             // Faça uma solicitação XMLHttpRequest para obter a cotação
             let xhr = new XMLHttpRequest();
 
-            xhr.open('GET', 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia' +
+            xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia' +
                 `(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='${moedaOrigem}'&@dataCotacao='${dataFormatada}'&` +
                 `$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,tipoBoletim`);
 

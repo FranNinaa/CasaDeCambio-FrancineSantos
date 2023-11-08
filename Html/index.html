@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +13,21 @@
 <body>
     <div class="container"><br>
         <div class="row">
-            <h1 class="text-center">Casa de Câmbio</h1>
+            
             <div class="d-flex justify-content-center align-items-center">
                 <form class="row g-1">
+                    <h1 class="text-center">Casa de Câmbio</h1>
                     <label for="IdMoedasOrigem" class="form-label">Moeda de Origem</label>
                     <select id="IdMoedasOrigem" class="form-select" aria-label="Default select example">
                         <option>Real</option>
                         <!-- As opções de moedas serão preenchidas dinamicamente pelo JavaScript -->
                     </select>
-                    <br><br>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Digite o Valor a Converter:</span>
+                        <input type="text" class="form-control" id="valorConverterInput">
+                        <span class="input-group-text">.00</span>
+                    </div>
                     <div class="g-1">
-                        <label for="valorConverterInput" class="form-label">Valor a Converter</label>
-                        <input type="number" class="form-control" id="valorConverterInput">
                     </div>
                     <label for="IdMoedasDestino" class="form-label">Moeda de Destino</label>
                     <select id="IdMoedasDestino" class="form-select" aria-label="Default select example">
@@ -31,15 +35,16 @@
                     </select>
                     <br><br>
 
-                    <button type="button" class="btn btn-primary" onclick="calcularCotacao()">Cotação</button>
+                    <button type="button" class="btn btn-secondary btn-lg" onclick="calcularCotacao()">Cotação</button>
+                    <label for="IdsaidaCotacao" class="form-label">Informação da Cotação:</label>
                     <textarea class="form-control" id="saidaTextArea" name="nmSaida" placeholder=""></textarea>
                 </form>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">  
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
     <script src="../Js/script.js"></script>
 </body>
 </html>

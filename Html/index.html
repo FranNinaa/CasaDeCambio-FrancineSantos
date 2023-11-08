@@ -15,58 +15,31 @@
             <h1 class="text-center">Casa de Câmbio</h1>
             <div class="d-flex justify-content-center align-items-center">
                 <form class="row g-1">
-                    <label for="moedaOrigemInput" class="form-label">Moeda de Origem</label>
+                    <label for="IdMoedasOrigem" class="form-label">Moeda de Origem</label>
                     <select id="IdMoedasOrigem" class="form-select" aria-label="Default select example">
-                        <option value="BRL" selected>Real</option>
+                        <option>Real</option>
+                        <!-- As opções de moedas serão preenchidas dinamicamente pelo JavaScript -->
                     </select>
                     <br><br>
                     <div class="g-1">
                         <label for="valorConverterInput" class="form-label">Valor a Converter</label>
                         <input type="number" class="form-control" id="valorConverterInput">
                     </div>
-                    <label for="moedaDestinoInput" class="form-label">Moeda de Destino</label>
+                    <label for="IdMoedasDestino" class="form-label">Moeda de Destino</label>
                     <select id="IdMoedasDestino" class="form-select" aria-label="Default select example">
-                        <option value="BRL" selected>Real</option>
+                        <!-- As opções de moedas serão preenchidas dinamicamente pelo JavaScript -->
                     </select>
                     <br><br>
 
-                    <button type="button" class="btn btn-primary" id="convertButton" onclick="calcularCotacao()">Cotação</button>
+                    <button type="button" class="btn btn-primary" onclick="calcularCotacao()">Cotação</button>
                     <textarea class="form-control" id="saidaTextArea" name="nmSaida" placeholder=""></textarea>
                 </form>
             </div>
         </div>
     </div>
-    <script>
-        carregarMoedas();
-
-        function carregarMoedas() {
-            const url = 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json&$select=simbolo,nomeFormatado';
-            const listaMoedasOrigem = document.getElementById("IdMoedasOrigem");
-            const listaMoedasDestino = document.getElementById("IdMoedasDestino");
-
-            // Usando o método fetch para obter os dados da API
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        // Em caso de erro, lança um erro e interrompe o processo
-                        throw new Error('Erro ao carregar moedas. Código de erro: ' + response.status);
-                    }
-                    // Se a resposta for bem-sucedida, analisa o JSON
-                    return response.json();
-                })
-                .then(moedas => {
-                    // Preenche os select boxes na tela com as moedas obtidas
-                    for (const moeda of moedas.value) {
-                        const optionMoeda = new Option(moeda.nomeFormatado, moeda.simbolo);
-                        listaMoedasOrigem.appendChild(optionMoeda);
-                        listaMoedasDestino.appendChild(optionMoeda.cloneNode(true));
-                    }
-                })
-                .catch(error => {
-                    // Trata erros exibindo uma mensagem de alerta
-                    alert(error.message);
-                });
-        }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">  
     </script>
+    <script src="../Js/script.js"></script>
 </body>
 </html>
